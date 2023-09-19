@@ -6,14 +6,14 @@ from scrapy import Selector
 from scrapy.http import HtmlResponse
 from stock_news.items import StockNewsItem
 from stock_news.public_func import mapping
-from tqdm.auto import tqdm
-
+# from tqdm.auto import tqdm
+from tqdm import tqdm
 
 class GeneralScrapeSpider(scrapy.Spider):
     name = "general_scrape"
     allowed_domains = ["#"]
 
-    def __init__(self, path='/home/zacharyzhang/KOINDB/news_data/general_market_news_sample.csv', name=None, **kwargs):
+    def __init__(self, path='/home/ec2-user/KOINDB/news_data/general_market_news_sample.csv', name=None, **kwargs):
 
         super().__init__(name=None, **kwargs)
         self.path = path
@@ -22,7 +22,7 @@ class GeneralScrapeSpider(scrapy.Spider):
         # Read the CSV file and filter URLs based on the 'source_name'
         if self.path is not None:
             df = pd.read_csv(self.path)
-            progress_bar = tqdm(range(df.shape[0]))
+            # progress_bar = tqdm(range(df.shape[0]))
             start = time.time()
             print(f'------------We are scraping {df.source_name.nunique()} websites------------')
             cnt = 0
@@ -32,7 +32,7 @@ class GeneralScrapeSpider(scrapy.Spider):
                     start_urls = df[df['source_name'] == source]['news_url'].tolist()
                     for url in start_urls:
                         yield scrapy.Request(url, callback=self.parse, meta={'source_name': source})
-                        progress_bar.update(1)
+                        # progress_bar.update(1)
                 except ValueError:
                     continue
                 # print(source)
