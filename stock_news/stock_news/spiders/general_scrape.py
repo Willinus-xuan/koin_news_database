@@ -83,14 +83,14 @@ class GeneralScrapeSpider(scrapy.Spider):
         else:
             print(response.status,response.url)
 
-process = CrawlerProcess(
-    settings={
-        "FEEDS": {
-            "items.json": {"format": "json"},
-        },
-    }
-)
-
-if __name__ == "__main__":
-    process.crawl(GeneralScrapeSpider)
-    process.start()  # the script will block here until the crawling is finished
+# process = CrawlerProcess(
+#     settings={
+#         "FEEDS": {
+#             "items.json": {"format": "json"},
+#         },
+#     }
+# )
+# 
+# if __name__ == "__main__":
+#     process.crawl(GeneralScrapeSpider)
+#     process.start()  # the script will block here until the crawling is finished
