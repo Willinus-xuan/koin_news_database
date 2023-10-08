@@ -12,6 +12,8 @@ class StockNewsPipeline:
         # Open the CSV file for writing when the spider is opened
         self.file = open('/home/ec2-user/KOINDB/news_data/news_url.csv', 'w', encoding='utf-8')
         self.content = open('/home/ec2-user/KOINDB/news_data/news_content.csv', 'w', encoding='utf-8')
+        # self.file = open('./news_url.csv', 'w', encoding='utf-8')
+        # self.content = open('./news_content.csv', 'w', encoding='utf-8')
         # Create a DataFrame to store the items
         self.df_img = pd.DataFrame(columns=['source_name','news_url','img_url'])
         self.df_news = pd.DataFrame(columns=['news_url', 'news_content'])

@@ -6,6 +6,7 @@ from scrapy import Selector
 from scrapy.http import HtmlResponse
 from stock_news.items import StockNewsItem
 from stock_news.public_func import mapping
+from scrapy.crawler import CrawlerProcess
 # from tqdm.auto import tqdm
 from tqdm import tqdm
 
@@ -81,3 +82,15 @@ class GeneralScrapeSpider(scrapy.Spider):
 
         else:
             print(response.status,response.url)
+
+process = CrawlerProcess(
+    settings={
+        "FEEDS": {
+            "items.json": {"format": "json"},
+        },
+    }
+)
+
+if __name__ == "__main__":
+    process.crawl(GeneralScrapeSpider)
+    process.start()  # the script will block here until the crawling is finished
